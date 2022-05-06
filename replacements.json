@@ -1,17 +1,17 @@
 [
   {
     "sourceFile": "./README",
-    "placeholder": "$TEST",
+    "placeholder": "\$TEST",
     "replacement": "${{ secrets.TEST }}"
   },
     {
     "sourceFile": "./README",
-    "placeholder": "$TEST2",
+    "placeholder": "\$TEST2",
     "replacement": "justatest"
   },
     {
-    "sourceFile": "./README",
-    "placeholder": "$TEST3",
+    "sourceFile": "README",
+    "placeholder": "\$TEST3",
     "replacement": "${{ secrets.TEST }}"
   }
 ]
