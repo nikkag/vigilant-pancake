@@ -32,3 +32,6 @@ jobs:
       uses: alexrogalskiy/github-action-tag-replacer@master
       with:
         sourceData: ./replacements.json
+    
+    - name: print README
+      run: cat README
