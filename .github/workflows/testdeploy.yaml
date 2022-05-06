@@ -9,6 +9,8 @@ on:
 jobs:
   build_landing:
     runs-on: ubuntu-latest
+    env:
+      DEPLOY_FILE: ./README
 
     steps:
     - name: Checkout Main Branch
@@ -36,7 +38,7 @@ jobs:
     - name: replace the tokens
       uses: cschleiden/replace-tokens@v1
       with:
-        files: './README'
+        files: "${{ env.DEPLOY_FILE }}"
       env:
         TEST: ${{ secrets.TEST }}
         TEST2: lkjsomt=
