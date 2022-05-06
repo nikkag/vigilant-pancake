@@ -28,10 +28,19 @@ jobs:
 #         sed -i "s/\$TEST/${{ secrets.TEST }}/g" READMESED
 #         cat READMESED
 
-    - name: Replace file placeholders
-      uses: alexrogalskiy/github-action-tag-replacer@master
+#     - name: Replace file placeholders
+#       uses: alexrogalskiy/github-action-tag-replacer@master
+#       with:
+#         sourceData: ./replacements.json
+
+    - name: replace the tokens
+      uses: cschleiden/replace-tokens@v1
       with:
-        sourceData: ./replacements.json
-    
+        files: './README'
+      env:
+        TEST: ${{ secrets.TEST }}
+        TEST2: lkjsomt=
+        TEST3: ${{ secrets.TEST }}
+
     - name: print README
       run: cat README
