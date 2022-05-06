@@ -25,5 +25,5 @@ jobs:
 
     - name: Encode Nginx Conf
       run: |
-      sed -i "s/\$TEST/${{ secrets.TEST }}/g" READMESED
-      cat READMESED
+        sed -i "s/\$TEST/${{ secrets.TEST }}/g" READMESED
+        cat READMESED
