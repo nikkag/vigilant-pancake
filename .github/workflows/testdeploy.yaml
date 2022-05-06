@@ -17,13 +17,18 @@ jobs:
         ref: master
         fetch-depth: 0
 
-    - name: 'Replace variables in deployment script'
-      uses: datamonsters/replace-action@v2
-      with:
-        files: README
-        replacements: $TEST=${{ secrets.TEST }}
+#     - name: 'Replace variables in deployment script'
+#       uses: datamonsters/replace-action@v2
+#       with:
+#         files: README
+#         replacements: $TEST=${{ secrets.TEST }}
 
-    - name: Encode Nginx Conf
-      run: |
-        sed -i "s/\$TEST/${{ secrets.TEST }}/g" READMESED
-        cat READMESED
+#     - name: Encode Nginx Conf
+#       run: |
+#         sed -i "s/\$TEST/${{ secrets.TEST }}/g" READMESED
+#         cat READMESED
+
+    - name: Replace file placeholders
+      uses: alexrogalskiy/github-action-tag-replacer@master
+      with:
+        sourceData: ./replacements.json
