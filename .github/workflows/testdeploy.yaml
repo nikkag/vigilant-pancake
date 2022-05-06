@@ -1,0 +1,29 @@
+name: Test playground
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build_landing:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Main Branch
+      uses: actions/checkout@v2
+      with:
+        ref: main
+        fetch-depth: 0
+
+    - name: 'Replace variables in deployment script'
+      uses: datamonsters/replace-action@v2
+      with:
+        files: README
+        replacements: $TEST=${{ secrets.TEST }}
+
+    - name: Encode Nginx Conf
+      run: |
+      sed -i "s/\$TEST/${{ secrets.TEST }}/g" READMESED
+      cat READMESED
