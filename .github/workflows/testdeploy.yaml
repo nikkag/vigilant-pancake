@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_landing:
+  playing:
     runs-on: ubuntu-latest
     env:
       DEPLOY_FILE: ./README
@@ -20,7 +20,7 @@ jobs:
         fetch-depth: 0
 
     - name: Decode private key
-      run: echo "FIREBASE_PRIVATE_KEY=$(echo ${{ secrets.TEST }} | base64 -d)" >> $GITHUB_ENV
+      run: echo "FIREBASE_PRIVATE_KEY=$(echo ${{ secrets.BASE64_THING }} | base64 -d)" >> $GITHUB_ENV
 
     - name: 'Replace variables in deployment script'
       uses: datamonsters/replace-action@v2
