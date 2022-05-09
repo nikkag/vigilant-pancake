@@ -19,11 +19,14 @@ jobs:
         ref: master
         fetch-depth: 0
 
+    - name: Decode private key
+      run: echo "FIREBASE_PRIVATE_KEY=$(echo ${{ secrets.TEST }} | base64 -d)" >> $GITHUB_ENV
+
     - name: 'Replace variables in deployment script'
       uses: datamonsters/replace-action@v2
       with:
         files: READMESED
-        replacements: $TEST=${{ secrets.TEST | base64 -d}}
+        replacements: $TEST=${{ env.FIREBASE_PRIVATE_KEY }}
 
     - name: cat READMESED
       run: cat READMESED
