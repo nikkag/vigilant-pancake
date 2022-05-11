@@ -25,7 +25,7 @@ jobs:
     #   run: echo "${{ secrets.TEST_PROJ }}" > .env.${{ env.APP }}.${{ env.PROJECT }}
 
     - name: Create env file from secrets
-      run: echo "${{ secrets.TEST_PROJ }}" > .env.test.proj
+      run: echo "${{ secrets.TEST_PROJ }}" > .env.TEST.PROJ
 
     - name: Cat env file
       run: cat .env.${{ env.APP }}.${{ env.PROJECT }}
