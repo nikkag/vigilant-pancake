@@ -21,8 +21,11 @@ jobs:
         ref: master
         fetch-depth: 0
 
+    # - name: Create env file from secrets
+    #   run: echo "${{ secrets.TEST_PROJ }}" > .env.${{ env.APP }}.${{ env.PROJECT }}
+
     - name: Create env file from secrets
-      run: echo "${{ secrets.TEST_PROJ }}" > .env.${{ env.APP }}.${{ env.PROJECT }}
+      run: echo "${{ secrets.TEST_PROJ }}" > .env.test.proj
 
     - name: Cat env file
       run: cat .env.${{ env.APP }}.${{ env.PROJECT }}
