@@ -22,7 +22,7 @@ jobs:
         fetch-depth: 0
 
     - name: Create env file from secrets
-      run: echo "${{ secrets_${{ env.APP }}_${{ env.PROJECT }} }}" > .env.${{ env.APP }}.${{ env.PROJECT }}
+      run: echo "${{ secrets.${{ env.APP }}_${{ env.PROJECT }} }}" > .env.${{ env.APP }}.${{ env.PROJECT }}
 
     - name: Cat env file
       run: cat .env.${{ env.APP }}.${{ env.PROJECT }}
