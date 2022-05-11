@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DEPLOY_FILE: ./README
+      APP: TEST
+      PROJECT: PROJ
 
     steps:
     - name: Checkout Main Branch
@@ -19,17 +21,23 @@ jobs:
         ref: master
         fetch-depth: 0
 
-    - name: Decode private key
-      run: echo "FIREBASE_PRIVATE_KEY=\"$(echo ${{ secrets.BASE64_THING }} | base64 -d)"\" >> $GITHUB_ENV
+    - name: Create env file from secrets
+      run: echo "${{ secrets_${{ env.APP }}_${{ env.PROJECT }} }}" > .env.${{ env.APP }}.${{ env.PROJECT }}
 
-    - name: 'Replace variables in deployment script'
-      uses: datamonsters/replace-action@v2
-      with:
-        files: READMESED
-        replacements: $TEST=${{ env.FIREBASE_PRIVATE_KEY }}
+    - name: Cat env file
+      run: cat .env.${{ env.APP }}.${{ env.PROJECT }}
 
-    - name: cat READMESED
-      run: cat READMESED
+    # - name: Decode private key
+    #   run: echo "FIREBASE_PRIVATE_KEY=\"$(echo ${{ secrets.BASE64_THING }} | base64 -d)"\" >> $GITHUB_ENV
+
+    # - name: 'Replace variables in deployment script'
+    #   uses: datamonsters/replace-action@v2
+    #   with:
+    #     files: READMESED
+    #     replacements: $TEST=${{ env.FIREBASE_PRIVATE_KEY }}
+
+    # - name: cat READMESED
+    #   run: cat READMESED
 
     # - name: Encode Nginx Conf
     #   run: |
