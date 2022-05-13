@@ -29,6 +29,7 @@ jobs:
       uses: timheuer/base64-to-file@v1.1
       with:
         fileName: '.env.black.staging'
+        fileDir: './'
         encodedString: ${{ secrets.ENCODED_ENV }}
 
     # - name: Decode private key
