@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DEPLOY_FILE: ./README
-      APP: TEST
+      APP: ENCODED_ENV
       PROJECT: black
 
     steps:
@@ -30,7 +30,7 @@ jobs:
       with:
         fileName: '.env.${{ env.PROJECT }}.staging'
         fileDir: './'
-        encodedString: ${{ secrets.ENCODED_ENV }}
+        encodedString: ${{ secrets[env.APP] }}
 
     # - name: Decode private key
     #   run: echo "FIREBASE_PRIVATE_KEY=\"$(echo ${{ secrets.BASE64_THING }} | base64 -d)"\" >> $GITHUB_ENV
