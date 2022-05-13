@@ -24,11 +24,12 @@ jobs:
     # - name: Create env file from secrets
     #   run: echo "${{ secrets.TEST_PROJ }}" > .env.${{ env.APP }}.${{ env.PROJECT }}
 
-    - name: Create env file from secrets
-      run: echo "${{ secrets.TEST_PROJ }}" > .env.TEST.PROJ
-
-    - name: Cat env file
-      run: cat .env.${{ env.APP }}.${{ env.PROJECT }}
+    - name: Decode base64 secret
+      id: write_file
+      uses: timheuer/base64-to-file@v1.1
+      with:
+        fileName: '.env.black.staging'
+        encodedString: ${{ secrets.ENCODED_ENV }}
 
     # - name: Decode private key
     #   run: echo "FIREBASE_PRIVATE_KEY=\"$(echo ${{ secrets.BASE64_THING }} | base64 -d)"\" >> $GITHUB_ENV
@@ -39,8 +40,8 @@ jobs:
     #     files: READMESED
     #     replacements: $TEST=${{ env.FIREBASE_PRIVATE_KEY }}
 
-    # - name: cat READMESED
-    #   run: cat READMESED
+    - name: cat env
+      run: cat .env.black.staging
 
     # - name: Encode Nginx Conf
     #   run: |
