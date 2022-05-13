@@ -12,7 +12,7 @@ jobs:
     env:
       DEPLOY_FILE: ./README
       APP: TEST
-      PROJECT: PROJ
+      PROJECT: black
 
     steps:
     - name: Checkout Main Branch
@@ -28,7 +28,7 @@ jobs:
       id: write_file
       uses: timheuer/base64-to-file@v1.1
       with:
-        fileName: '.env.black.staging'
+        fileName: '.env.${{ env.PROJECT }}.staging'
         fileDir: './'
         encodedString: ${{ secrets.ENCODED_ENV }}
 
