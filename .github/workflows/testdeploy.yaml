@@ -56,6 +56,18 @@ jobs:
         namespace: app1
         format: "${major}.${minor}.${patch}"
 
+    - name: Git Version
+      id: semvar2
+      uses: paulhatch/semantic-version@v4.0.3
+      with:
+        change_path: app2/
+        namespace: app2
+        format: "${major}.${minor}.${patch}"
+
     - name: Print version
       run:
         echo ${{ steps.semvar.outputs.version }} ${{ steps.semvar.outputs.version_tag }} ${{ steps.semvar.outputs.changed }}
+
+    - name: Print version 2
+      run:
+        echo ${{ steps.semvar2.outputs.version }} ${{ steps.semvar2.outputs.version_tag }} ${{ steps.semvar2.outputs.changed }}
