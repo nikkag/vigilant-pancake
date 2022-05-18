@@ -51,7 +51,7 @@ jobs:
     #     cat READMESED
     - name: Git Version
       id: semvar
-      uses: paulhatch/semantic-version@4.0.2
+      uses: paulhatch/semantic-version@v4.0.3
       with:
         changepath: app1/
         namespace: app1
