@@ -88,10 +88,15 @@ jobs:
         git_commit_sha: ${{ github.sha }}
         version: "${{ steps.semvar2.outputs.version_tag }}"
 
-    - name: Merge development -> staging
-      uses: devmasx/merge-branch@master
+    # - name: Merge development -> staging
+    #   uses: devmasx/merge-branch@master
+    #   with:
+    #     type: now
+    #     from_branch: master
+    #     target_branch: staging
+    #     github_token: ${{ github.token }}
+    - uses: everlytic/branch-merge@1.1.2
       with:
-        type: now
-        from_branch: master
-        target_branch: staging
         github_token: ${{ github.token }}
+        source_ref: master
+        target_branch: staging
