@@ -53,7 +53,7 @@ jobs:
       id: semvar
       uses: paulhatch/semantic-version@v4.0.3
       with:
-        changepath: app1/
+        change_path: app1/
         namespace: app1
 
     - name: Print version
