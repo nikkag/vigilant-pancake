@@ -51,11 +51,11 @@ jobs:
     #     cat READMESED
     - name: Git Version
       id: semvar
-      uses: codacy/git-version@2.5.4
+      uses: paulhatch/semantic-version@4.0.3
       with:
-        prefix: app1-
-        log-paths: app1/
+        changepath: app1/
+        namespace: app1
 
     - name: Print version
       run:
-        echo ${{ steps.semvar.outputs.version }}
+        echo ${{ steps.semvar.outputs.version }} ${{ steps.semvar.outputs.version_tag }} ${{ steps.semvar.outputs.changed }}
