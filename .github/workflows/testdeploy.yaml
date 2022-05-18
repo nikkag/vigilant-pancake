@@ -19,7 +19,7 @@ jobs:
     - name: Checkout Main Branch
       uses: actions/checkout@v2
       with:
-        ref: master
+        ref: staging
         fetch-depth: 0
 
     # - name: Create env file from secrets
