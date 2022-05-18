@@ -52,6 +52,9 @@ jobs:
     - name: Git Version
       id: semvar
       uses: codacy/git-version@2.5.4
+      with:
+        prefix: app1-
+        log-paths: app1/
 
     - name: Print version
       run:
