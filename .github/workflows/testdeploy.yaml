@@ -19,7 +19,7 @@ jobs:
     - name: Checkout Main Branch
       uses: actions/checkout@v2
       with:
-        ref: master
+        ref: ${{ github.head_ref }}
         fetch-depth: 0
 
     # - name: Create env file from secrets
@@ -50,4 +50,9 @@ jobs:
     #     sed -i "s/\$TEST/${{ secrets.TEST }}/g" READMESED
     #     cat READMESED
     - name: Git Version
+      id: semvar
       uses: codacy/git-version@2.5.4
+
+    - name: Print version
+      run:
+        echo ${{ steps.semvar.outputs.version }}
