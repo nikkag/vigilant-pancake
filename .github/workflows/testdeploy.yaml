@@ -72,18 +72,18 @@ jobs:
       run:
         echo ${{ steps.semvar2.outputs.version }} ${{ steps.semvar2.outputs.version_tag }} ${{ steps.semvar2.outputs.changed }}
 
-      - name: package-version-to-git-tag-app1
-        uses: pkgdeps/git-tag-action@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_repo: ${{ github.repository }}
-          git_commit_sha: ${{ github.sha }}
-          version: "${{ steps.semvar.outputs.version_tag }}"
+    - name: package-version-to-git-tag-app1
+      uses: pkgdeps/git-tag-action@v2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_repo: ${{ github.repository }}
+        git_commit_sha: ${{ github.sha }}
+        version: "${{ steps.semvar.outputs.version_tag }}"
 
-      - name: package-version-to-git-tag-app2
-        uses: pkgdeps/git-tag-action@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_repo: ${{ github.repository }}
-          git_commit_sha: ${{ github.sha }}
-          version: "${{ steps.semvar2.outputs.version_tag }}"
+    - name: package-version-to-git-tag-app2
+      uses: pkgdeps/git-tag-action@v2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_repo: ${{ github.repository }}
+        git_commit_sha: ${{ github.sha }}
+        version: "${{ steps.semvar2.outputs.version_tag }}"
