@@ -51,5 +51,3 @@ jobs:
     #     cat READMESED
     - name: Git Version
       uses: codacy/git-version@2.5.4
-      with:
-        dev-branch: staging
