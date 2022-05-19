@@ -52,6 +52,7 @@ jobs:
       id: semvar
       uses: paulhatch/semantic-version@v4.0.3
       with:
+        tag_prefix: "v"
         change_path: app1/
         namespace: app1
         format: "${major}.${minor}.${patch}"
@@ -88,13 +89,6 @@ jobs:
         git_commit_sha: ${{ github.sha }}
         version: "${{ steps.semvar2.outputs.version_tag }}"
 
-    # - name: Merge development -> staging
-    #   uses: devmasx/merge-branch@master
-    #   with:
-    #     type: now
-    #     from_branch: master
-    #     target_branch: staging
-    #     github_token: ${{ github.token }}
     - uses: everlytic/branch-merge@1.1.2
       with:
         github_token: ${{ github.token }}

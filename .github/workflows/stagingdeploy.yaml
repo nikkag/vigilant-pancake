@@ -52,6 +52,7 @@ jobs:
       id: semvar
       uses: paulhatch/semantic-version@v4.0.3
       with:
+        tag_prefix: "v"
         change_path: app1/
         namespace: app1
         format: "${major}.${minor}.${patch}-staging${increment}.${{ github.sha }}"
@@ -60,6 +61,7 @@ jobs:
       id: semvar2
       uses: paulhatch/semantic-version@v4.0.3
       with:
+        tag_prefix: "v"
         change_path: app2/
         namespace: app2
         format: "${major}.${minor}.${patch}-prerelease${increment}"
