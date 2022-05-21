@@ -7,8 +7,27 @@ on:
   workflow_dispatch:
 
 jobs:
+  git_version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.semvar.outputs.version_tag }}
+    steps:
+
+    - name: Checkout Main Branch
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+        fetch-depth: 0
+
+    - name: Git Version
+      id: semvar
+      uses: paulhatch/semantic-version@v4.0.3
+      with:
+        format: "${major}.${minor}.${patch}"
+
   playing:
     runs-on: ubuntu-latest
+    needs: git_version
     env:
       DEPLOY_FILE: ./README
       APP: ENCODED_ENV
@@ -48,11 +67,11 @@ jobs:
     #   run: |
     #     sed -i "s/\$TEST/${{ secrets.TEST }}/g" READMESED
     #     cat READMESED
-    - name: Git Version
-      id: semvar
-      uses: paulhatch/semantic-version@v4.0.3
-      with:
-        format: "${major}.${minor}.${patch}"
+    # - name: Git Version
+    #   id: semvar
+    #   uses: paulhatch/semantic-version@v4.0.3
+    #   with:
+    #     format: "${major}.${minor}.${patch}"
 
     # - name: Git Version
     #   id: semvar2
@@ -64,7 +83,7 @@ jobs:
 
     - name: Print version
       run:
-        echo ${{ steps.semvar.outputs.version }} ${{ steps.semvar.outputs.version_tag }} ${{ steps.semvar.outputs.changed }}
+        echo ${{ needs.git_version.outputs.version }}
 
     # - name: Print version 2
     #   run:
@@ -76,7 +95,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         github_repo: ${{ github.repository }}
         git_commit_sha: ${{ github.sha }}
-        version: "${{ steps.semvar.outputs.version_tag }}"
+        version: "${{ needs.git_version.outputs.version }}"
 
     - name: Git Version again
       id: semvara
