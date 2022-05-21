@@ -125,7 +125,7 @@ jobs:
     #     target_branch: staging
   another:
     runs-on: ubuntu-latest
-    needs: playing
+    needs: [git_version, playing]
     steps:
 
     - name: Print version
