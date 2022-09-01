@@ -24,6 +24,7 @@ jobs:
       uses: paulhatch/semantic-version@v4.0.3
       with:
         format: "${major}.${minor}.${patch}"
+        namespace: vigil
 
   playing:
     runs-on: ubuntu-latest
