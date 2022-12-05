@@ -133,11 +133,11 @@ jobs:
     #     github_token: ${{ github.token }}
     #     source_ref: master
     #     target_branch: staging
-  another:
-    runs-on: ubuntu-latest
-    needs: [git_version, playing]
-    steps:
+  # another:
+  #   runs-on: ubuntu-latest
+  #   needs: [git_version, playing]
+  #   steps:
 
-    - name: Print version
-      run:
-        echo ${{ needs.git_version.outputs.version }}
+  #   - name: Print version
+  #     run:
+  #       echo ${{ needs.git_version.outputs.version }}
