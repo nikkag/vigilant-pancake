@@ -41,12 +41,12 @@ jobs:
         ref: ${{ github.head_ref }}
         fetch-depth: 0
 
-      - name: 'Replace variables in deployment script'
-        uses: cschleiden/replace-tokens@v1
-        with:
-          files: "[app1/README, app2/README]"
-        env:
-          CHANGE_HERE: this_is_the_greatest_or_something
+    - name: 'Replace variables in deployment script'
+      uses: cschleiden/replace-tokens@v1
+      with:
+        files: "[app1/README, app2/README]"
+      env:
+        CHANGE_HERE: this_is_the_greatest_or_something
 
     # - name: Create env file from secrets
     #   run: echo "${{ secrets.TEST_PROJ }}" > .env.${{ env.APP }}.${{ env.PROJECT }}
