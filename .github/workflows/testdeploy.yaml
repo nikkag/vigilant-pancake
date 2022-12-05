@@ -28,7 +28,6 @@ jobs:
 
   playing:
     runs-on: ubuntu-latest
-    needs: git_version
     env:
       DEPLOY_FILE: ./README
       APP: ENCODED_ENV
