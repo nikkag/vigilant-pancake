@@ -41,16 +41,23 @@ jobs:
         ref: ${{ github.head_ref }}
         fetch-depth: 0
 
+      - name: 'Replace variables in deployment script'
+        uses: cschleiden/replace-tokens@v1
+        with:
+          files: "[app1/README, app2/README]"
+        env:
+          CHANGE_HERE: this_is_the_greatest_or_something
+
     # - name: Create env file from secrets
     #   run: echo "${{ secrets.TEST_PROJ }}" > .env.${{ env.APP }}.${{ env.PROJECT }}
 
-    - name: Decode base64 secret
-      id: write_file
-      uses: timheuer/base64-to-file@v1.1
-      with:
-        fileName: '.env.${{ env.PROJECT }}.staging'
-        fileDir: './'
-        encodedString: ${{ secrets[env.APP] }}
+    # - name: Decode base64 secret
+    #   id: write_file
+    #   uses: timheuer/base64-to-file@v1.1
+    #   with:
+    #     fileName: '.env.${{ env.PROJECT }}.staging'
+    #     fileDir: './'
+    #     encodedString: ${{ secrets[env.APP] }}
 
     # - name: Decode private key
     #   run: echo "FIREBASE_PRIVATE_KEY=\"$(echo ${{ secrets.BASE64_THING }} | base64 -d)"\" >> $GITHUB_ENV
@@ -61,8 +68,8 @@ jobs:
     #     files: READMESED
     #     replacements: $TEST=${{ env.FIREBASE_PRIVATE_KEY }}
 
-    - name: cat env
-      run: cat .env.black.staging
+    # - name: cat env
+    #   run: cat .env.black.staging
 
     # - name: Encode Nginx Conf
     #   run: |
@@ -82,27 +89,27 @@ jobs:
     #     namespace: app2
     #     format: "${major}.${minor}.${patch}"
 
-    - name: Print version
-      run:
-        echo ${{ needs.git_version.outputs.version }}
+    # - name: Print version
+    #   run:
+    #     echo ${{ needs.git_version.outputs.version }}
 
     # - name: Print version 2
     #   run:
     #     echo ${{ steps.semvar2.outputs.version }} ${{ steps.semvar2.outputs.version_tag }} ${{ steps.semvar2.outputs.changed }}
 
-    - name: package-version-to-git-tag-app1
-      uses: pkgdeps/git-tag-action@v2
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        github_repo: ${{ github.repository }}
-        git_commit_sha: ${{ github.sha }}
-        version: "${{ needs.git_version.outputs.version }}"
+    # - name: package-version-to-git-tag-app1
+    #   uses: pkgdeps/git-tag-action@v2
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     github_repo: ${{ github.repository }}
+    #     git_commit_sha: ${{ github.sha }}
+    #     version: "${{ needs.git_version.outputs.version }}"
 
-    - name: Git Version again
-      id: semvara
-      uses: paulhatch/semantic-version@v4.0.3
-      with:
-        format: "${major}.${minor}.${patch}"
+    # - name: Git Version again
+    #   id: semvara
+    #   uses: paulhatch/semantic-version@v4.0.3
+    #   with:
+    #     format: "${major}.${minor}.${patch}"
 
     # - name: package-version-to-git-tag-app2
     #   uses: pkgdeps/git-tag-action@v2
