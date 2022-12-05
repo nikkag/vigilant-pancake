@@ -7,24 +7,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  git_version:
-    runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.semvar.outputs.version_tag }}
-    steps:
+  # git_version:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     version: ${{ steps.semvar.outputs.version_tag }}
+  #   steps:
 
-    - name: Checkout Repo
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.head_ref }}
-        fetch-depth: 0
+  #   - name: Checkout Repo
+  #     uses: actions/checkout@v2
+  #     with:
+  #       ref: ${{ github.head_ref }}
+  #       fetch-depth: 0
 
-    - name: Git Version
-      id: semvar
-      uses: paulhatch/semantic-version@v4.0.3
-      with:
-        format: "${major}.${minor}.${patch}"
-        namespace: vigil
+  #   - name: Git Version
+  #     id: semvar
+  #     uses: paulhatch/semantic-version@v4.0.3
+  #     with:
+  #       format: "${major}.${minor}.${patch}"
+  #       namespace: vigil
 
   playing:
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
     - name: 'Replace variables in deployment script'
       uses: cschleiden/replace-tokens@v1
       with:
-        files: "app1/README"
+        files: "app1/README, app2/README"
       env:
         CHANGE_HERE: this_is_the_greatest_or_something
 
@@ -68,8 +68,11 @@ jobs:
     #     files: READMESED
     #     replacements: $TEST=${{ env.FIREBASE_PRIVATE_KEY }}
 
-    # - name: cat env
-    #   run: cat .env.black.staging
+    - name: cat env
+      run: cat app1/README
+
+    - name: cat env 2
+      run: cat app2/README
 
     # - name: Encode Nginx Conf
     #   run: |
